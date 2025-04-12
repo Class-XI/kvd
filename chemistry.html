@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chemistry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Rajdhani', sans-serif;
+      background: radial-gradient(circle at center, #000428, #001f3f, #000000);
+      overflow: hidden;
+      position: relative;
+    }
+
+    #stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      gap: 25px;
+    }
+
+    .glow-button {
+      padding: 18px 30px;
+      font-size: 22px;
+      background: linear-gradient(145deg, #00c6ff, #0072ff);
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow:
+        0 5px 15px rgba(0, 247, 255, 0.4),
+        0 0 40px rgba(0, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      position: relative;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      text-shadow:
+        2px 2px 0 #00f7ff,
+        4px 4px 10px #0072ff;
+      font-family: 'Bungee', sans-serif;
+    }
+
+    .glow-button:hover {
+      transform: scale(1.06);
+      box-shadow:
+        0 5px 25px rgba(0, 247, 255, 0.6),
+        0 0 80px rgba(0, 255, 255, 0.4);
+    }
+
+    .floating-icon {
+      position: absolute;
+      width: 30px;
+      animation: floatIcon 20s linear infinite;
+      opacity: 0.8;
+      z-index: 0;
+      filter: drop-shadow(0 0 5px cyan);
+    }
+
+    @keyframes floatIcon {
+      0% {
+        transform: translateX(-100vw) translateY(100vh) rotate(0deg);
+      }
+      100% {
+        transform: translateX(100vw) translateY(-100vh) rotate(360deg);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .glow-button {
+        font-size: 18px;
+        padding: 14px 22px;
+      }
+    @media (max-width: 600px) {
+      .glow-button {
+        font-size: 24px;
+        padding: 15px 25px;
+      }
+
+      .gift-tag {
+        font-size: 12px;
+        padding: 8px 16px;
+      }
+
+      .icon {
+        font-size: 18px;
+      }
+    }
+    } 
+     </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById("stars");
+      const ctx = canvas.getContext("2d");
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      const stars = Array.from({ length: 120 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5,
+        alpha: Math.random(),
+        delta: 0.005 + Math.random() * 0.015,
+      }));
+
+      function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let star of stars) {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+          ctx.fill();
+          star.alpha += star.delta;
+          if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
+        }
+        requestAnimationFrame(animateStars);
+      }
+
+      animateStars();
+
+      const icons = ['📘','📕','📝','📚','📖','✏️','🧠','🔬','📐'];
+      for (let i = 0; i < 20; i++) {
+        const span = document.createElement('span');
+        span.className = 'floating-icon';
+        span.textContent = icons[Math.floor(Math.random() * icons.length)];
+        span.style.top = `${Math.random() * 100}%`;
+        span.style.left = `${Math.random() * 100}%`;
+        span.style.fontSize = `${16 + Math.random() * 24}px`;
+        span.style.animationDuration = `${10 + Math.random() * 20}s`;
+        document.body.appendChild(span);
+      }
+    });
+
+    function goTo(paper) {
+      const links = {
+        Board: "file/Chem_Board-Deepak.pdf", // replace with actual links
+        Preboard1: "file/Chem_PB1-Deepak.pdf",
+        Preboard2: "file/Chem_PB2-Deepak.pdf",
+        Preboard3: "file/Chem_PB3-Deepak.pdf",
+        Monthly: "file/Chem_Mt-Deepak.pdf",
+        Practical: "#"
+      };
+      window.open(links[paper], "_blank");
+    }
+  </script>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="container">
+    <button class="glow-button" onclick="goTo('Board')">Board</button>
+    <button class="glow-button" onclick="goTo('Preboard1')">Preboard 1</button>
+    <button class="glow-button" onclick="goTo('Preboard2')">Preboard 2</button>
+    <button class="glow-button" onclick="goTo('Preboard3')">Preboard 3</button>
+    <button class="glow-button" onclick="goTo('Monthly')">Monthly</button>
+  </div>
+  <div class="gift-tag">🎁 Gift From Deepak</div>
+</body>
+</html>
