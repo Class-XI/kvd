@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>12th Papers KVD</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      font-family: 'Rajdhani', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      position: relative;
+    }
+
+    /* Background Gradient */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, #000428, #001f3f, #000000);
+      z-index: 0;
+    }
+
+    /* Canvas for Stars */
+    canvas#stars {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* Floating Glowing Icons */
+    .icon {
+      position: absolute;
+      color: #00eaff;
+      text-shadow: 0 0 6px #00eaff, 0 0 12px #00f7ff;
+      opacity: 0;
+      animation: floatIcon linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes floatIcon {
+      0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.5) rotate(0deg);
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Glowing Button */
+    .glow-button {
+      padding: 20px 40px;
+      font-size: 36px;
+      background: linear-gradient(145deg, #00c6ff, #0072ff);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow:
+        0 5px 15px rgba(0, 247, 255, 0.4),
+        0 0 60px rgba(0, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      position: relative;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      text-shadow:
+        2px 2px 0 #00f7ff,
+        4px 4px 10px #0072ff;
+      z-index: 10;
+      font-family: 'Bungee', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .glow-button:hover {
+      transform: scale(1.08);
+      box-shadow:
+        0 5px 25px rgba(0, 247, 255, 0.6),
+        0 0 80px rgba(0, 255, 255, 0.4);
+    }
+
+    .gift-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #00bcd4;
+      padding: 10px 20px;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+      animation: pulseGlow 2s infinite ease-in-out;
+      font-family: 'Rajdhani', sans-serif;
+      z-index: 10;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+      }
+      50% {
+        box-shadow: 0 0 20px #00f7ff, 0 0 30px #00f7ff;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .glow-button {
+        font-size: 24px;
+        padding: 15px 25px;
+      }
+
+      .gift-tag {
+        font-size: 12px;
+        padding: 8px 16px;
+      }
+
+      .icon {
+        font-size: 18px;
+      }
+    }
+  </style>
+
+  <script>
+    function redirectToLink() {
+      window.location.href = ("https://drive.google.com/drive/folders/1rSpf8C9xMGaMm0GbCQIeB5BWaFx9c5Qt?usp=sharing"); // Replace with your actual link
+    }
+
+    // Floating glowing icons
+    document.addEventListener("DOMContentLoaded", () => {
+      const icons = ["📚", "📖", "📝", "🎓", "📒"];
+      const body = document.body;
+
+      for (let i = 0; i < 30; i++) {
+        const icon = document.createElement("div");
+        icon.className = "icon";
+        icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+
+        const direction = Math.floor(Math.random() * 4);
+        let startX, startY, deltaX, deltaY;
+
+        if (direction === 0) {
+          startX = Math.random() * 100;
+          startY = -10;
+          deltaX = (Math.random() - 0.5) * 200;
+          deltaY = 120 + Math.random() * 80;
+        } else if (direction === 1) {
+          startX = Math.random() * 100;
+          startY = 110;
+          deltaX = (Math.random() - 0.5) * 200;
+          deltaY = -120 - Math.random() * 80;
+        } else if (direction === 2) {
+          startX = -10;
+          startY = Math.random() * 100;
+          deltaX = 120 + Math.random() * 80;
+          deltaY = (Math.random() - 0.5) * 200;
+        } else {
+          startX = 110;
+          startY = Math.random() * 100;
+          deltaX = -120 - Math.random() * 80;
+          deltaY = (Math.random() - 0.5) * 200;
+        }
+
+        icon.style.left = `${startX}vw`;
+        icon.style.top = `${startY}vh`;
+        icon.style.setProperty('--x', `${deltaX}vw`);
+        icon.style.setProperty('--y', `${deltaY}vh`);
+        icon.style.animationDuration = (8 + Math.random() * 5) + "s";
+        icon.style.fontSize = (20 + Math.random() * 20) + "px";
+        body.appendChild(icon);
+      }
+
+      // Create star canvas
+      const canvas = document.createElement('canvas');
+      canvas.id = "stars";
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext("2d");
+
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+
+      let stars = [];
+
+      for (let i = 0; i < 120; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 1.5,
+          alpha: Math.random(),
+          delta: 0.005 + Math.random() * 0.015
+        });
+      }
+
+      function animateStars() {
+        ctx.clearRect(0, 0, width, height);
+        for (let star of stars) {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+          ctx.fill();
+          star.alpha += star.delta;
+          if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
+        }
+        requestAnimationFrame(animateStars);
+      }
+
+      animateStars();
+
+      // Resize on window change
+      window.addEventListener('resize', () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      });
+    });
+  </script>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="gift-tag">🎁 Gift From Deepak</div>
+  <button class="glow-button" onclick="redirectToLink()">12th Papers KVD</button>
+</body>
+</html>
