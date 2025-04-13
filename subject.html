@@ -113,6 +113,39 @@
       }
     }
     }
+    .top-tag {
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 188, 212, 0.2);
+  padding: 10px 25px;
+  border-radius: 30px;
+  color: #00f7ff;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+  text-align: center;
+  z-index: 999;
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+.top-tag .slogan {
+  font-family: 'Bungee', cursive;
+  color: #00eaff;
+  text-shadow: 0 0 5px #00eaff, 0 0 15px #00eaff;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+  }
+  50% {
+    box-shadow: 0 0 20px #00f7ff, 0 0 30px #00f7ff;
+  }
+}
+
   </style>
 
   <script>
@@ -180,6 +213,10 @@
 </head>
 <body>
   <canvas id="stars"></canvas>
+  <div class="top-tag">
+  🎁 Gift From Deepak &nbsp;|&nbsp; <span class="slogan">Deepak hai to mumkin hai</span>
+</div>
+
 
   <div class="container">
     <button class="glow-button" onclick="goTo('CS')">CS</button>
@@ -187,6 +224,7 @@
     <button class="glow-button" onclick="goTo('Physics')">Physics</button>
     <button class="glow-button" onclick="goTo('Math')">Math</button>
     <button class="glow-button" onclick="goTo('English')">English</button>
+
   </div>
   <div class="gift-tag">🎁 Gift From Deepak</div>
 </body>
