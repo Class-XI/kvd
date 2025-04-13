@@ -6,6 +6,24 @@
   <title>Physics</title>
   <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
   <style>
+    .back-button {
+  display: inline-block;
+  margin: 20px;
+  padding: 10px 20px;
+  color: #fff;
+  background: linear-gradient(135deg, #ff00cc, #3333ff);
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 1.1em;
+  box-shadow: 0 0 15px rgba(255, 0, 204, 0.6);
+  transition: transform 0.2s ease;
+}
+.back-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 204, 0.9);
+}
+
     * {
       margin: 0;
       padding: 0;
@@ -180,6 +198,7 @@
     <button class="glow-button" onclick="goTo('Preboard2')">Preboard 2</button>
     <button class="glow-button" onclick="goTo('Preboard3')">Preboard 3</button>
     <button class="glow-button" onclick="goTo('Monthly')">Monthly</button>
+    <a href="index.html" class="back-button">← Back to Home</a>
   </div>
   <div class="gift-tag">🎁 Gift From Deepak</div>
 </body>
