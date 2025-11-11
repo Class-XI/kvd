@@ -6,7 +6,7 @@
   <title>Subjects</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -18,10 +18,49 @@
     html, body {
       width: 100%;
       height: 100%;
-      font-family: 'Rajdhani', sans-serif;
-      background: radial-gradient(circle at center, #000428, #001f3f, #000000);
+      font-family: 'Inter', sans-serif;
+      background: #fff8cc;
       overflow: hidden;
       position: relative;
+    }
+
+    /* Decorative Background */
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 200, 0.5);
+      filter: blur(40px);
+      z-index: 0;
+    }
+
+    .bg-circle.one {
+      width: 320px;
+      height: 320px;
+      top: -60px;
+      left: -40px;
+    }
+
+    .bg-circle.two {
+      width: 260px;
+      height: 260px;
+      bottom: -40px;
+      right: -40px;
+      background: rgba(255, 230, 150, 0.55);
+    }
+
+    .bg-stripes {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+        135deg,
+        rgba(255,255,230,0.4) 0%,
+        rgba(255,255,255,0.3) 20%,
+        transparent 20%
+      );
+      background-size: 25px 25px;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
     }
 
     #stars {
@@ -35,52 +74,57 @@
 
     .container {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px;
       gap: 25px;
     }
 
+    /* 3D Button */
     .glow-button {
-      padding: 18px 30px;
-      font-size: 22px;
-      background: linear-gradient(145deg, #00c6ff, #0072ff);
+      padding: 18px 32px;
+      font-size: 26px;
+      background: #3b82f6;
+      color: white;
       border: none;
-      border-radius: 40px;
+      border-radius: 10px;
       cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 1px;
+
       box-shadow:
-        0 5px 15px rgba(0, 247, 255, 0.4),
-        0 0 40px rgba(0, 255, 255, 0.2);
-      transition: all 0.3s ease;
-      position: relative;
-      color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
-      text-shadow:
-        2px 2px 0 #00f7ff,
-        4px 4px 10px #0072ff;
-      font-family: 'Bungee', sans-serif;
+        0 6px 0 #1e40af,
+        0 10px 20px rgba(0,0,0,0.25);
+      transition: 0.2s ease;
     }
 
     .glow-button:hover {
-      transform: scale(1.06);
+      transform: translateY(-4px);
       box-shadow:
-        0 5px 25px rgba(0, 247, 255, 0.6),
-        0 0 80px rgba(0, 255, 255, 0.4);
+        0 10px 0 #1e40af,
+        0 15px 25px rgba(0,0,0,0.25);
     }
 
+    .glow-button:active {
+      transform: translateY(3px);
+      box-shadow:
+        0 3px 0 #1e40af,
+        0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Floating Icons */
     .floating-icon {
       position: absolute;
       width: 30px;
-      animation: floatIcon 20s linear infinite;
-      opacity: 0.8;
+      opacity: 0.7;
       z-index: 0;
-      filter: drop-shadow(0 0 5px cyan);
+      color: #444;
+      animation: floatIcon 20s linear infinite;
+      filter: drop-shadow(0 0 4px rgba(0,0,0,0.1));
     }
 
     @keyframes floatIcon {
@@ -92,34 +136,55 @@
       }
     }
 
-    @media (max-width: 500px) {
-      .glow-button {
-        font-size: 18px;
-        padding: 14px 22px;
-      }
-      @media (max-width: 600px) {
-      .glow-button {
-        font-size: 24px;
-        padding: 15px 25px;
-      }
+    /* Drako Tag */
+    .gift-tag {
+      position: absolute;
+      top: 22px;
+      right: 22px;
 
-      .gift-tag {
-        font-size: 12px;
-        padding: 8px 16px;
-      }
+      background: white;
+      padding: 12px 24px;
+      border-radius: 12px;
 
-      .icon {
-        font-size: 18px;
+      font-weight: 700;
+      font-size: 15px;
+      color: #2b2b2b;
+      letter-spacing: 0.5px;
+
+      border: 2px solid #e5c45d;
+      box-shadow:
+        0 4px 0 #d4b24f,
+        0 6px 12px rgba(0,0,0,0.15);
+
+      transition: 0.2s ease;
+      z-index: 3;
+    }
+
+    .gift-tag:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 6px 0 #d4b24f,
+        0 10px 18px rgba(0,0,0,0.18);
+    }
+
+    .gift-tag:active {
+      transform: translateY(2px);
+      box-shadow:
+        0 2px 0 #d4b24f,
+        0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    @media (max-width: 600px) {
+      .glow-button {
+        font-size: 20px;
+        padding: 14px 24px;
       }
     }
-    }
-
-
   </style>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Animate Stars
+      // Stars
       const canvas = document.getElementById("stars");
       const ctx = canvas.getContext("2d");
 
@@ -127,7 +192,6 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       }
-
       resizeCanvas();
       window.addEventListener("resize", resizeCanvas);
 
@@ -141,20 +205,19 @@
 
       function animateStars() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let star of stars) {
+        for (let s of stars) {
           ctx.beginPath();
-          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+          ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0,0,0,${s.alpha * 0.4})`;
           ctx.fill();
-          star.alpha += star.delta;
-          if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
+          s.alpha += s.delta;
+          if (s.alpha <= 0 || s.alpha >= 1) s.delta *= -1;
         }
         requestAnimationFrame(animateStars);
       }
-
       animateStars();
 
-      // Add floating icons
+      // Floating icons
       const icons = ['📘','📕','📝','📚','📖','✏️','🧠','🔬','📐'];
       for (let i = 0; i < 20; i++) {
         const span = document.createElement('span');
@@ -170,7 +233,7 @@
 
     function goTo(subject) {
       const links = {
-        CS: ("cs.html"),
+        CS: "cs.html",
         Chemistry: "chemistry.html",
         Physics: "physics.html",
         Math: "math.html",
@@ -180,10 +243,17 @@
     }
   </script>
 </head>
+
 <body>
   <canvas id="stars"></canvas>
-  
 
+  <!-- Background Effects -->
+  <div class="bg-circle one"></div>
+  <div class="bg-circle two"></div>
+  <div class="bg-stripes"></div>
+
+  <!-- Drako Tag -->
+  <div class="gift-tag">Drako 🍂</div>
 
   <div class="container">
     <button class="glow-button" onclick="goTo('CS')">CS</button>
@@ -191,8 +261,7 @@
     <button class="glow-button" onclick="goTo('Physics')">Physics</button>
     <button class="glow-button" onclick="goTo('Math')">Math</button>
     <button class="glow-button" onclick="goTo('English')">English</button>
-
   </div>
-  <div class="gift-tag">🎁 Gift From Deepak</div>
+
 </body>
 </html>
